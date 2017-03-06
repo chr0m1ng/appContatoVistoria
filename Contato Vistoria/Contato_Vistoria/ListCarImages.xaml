@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Contato_Vistoria.ListCarImages"
+             Title="Imagens"
+             BackgroundColor="White"
+             Padding="0, 20, 0, 0">
+    <ListView ItemsSource="{Binding Items}"
+                ItemTapped="Handle_ItemTapped"
+                ItemSelected="Handle_ItemSelected"
+                HasUnevenRows="true"
+                
+                IsGroupingEnabled="False"
+                
+                IsPullToRefreshEnabled="true"
+                CachingStrategy="RecycleElement"
+                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                RefreshCommand="{Binding RefreshDataCommand}">
+        <!--GroupShortNameBinding="{Binding Key}"-->
+        <!--GroupDisplayBinding="{Binding Key}"-->
+        
+        
+        <!--Built in Cells-->
+        <!--  
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <TextCell Text="{Binding Text}"
+                      Detail="{Binding Detail}"/>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+        -->
+        <!--Custom View Cells-->
+
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Orientation="Vertical">
+                        <StackLayout Orientation="Horizontal" Spacing="5">
+                            <Image Source="{Binding Image}" Aspect="Fill" WidthRequest="100" HeightRequest="60"/>
+                            <Label  Text="{Binding Text}" FontSize="30"/>
+                        </StackLayout>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+
+        <ListView.Footer>
+            <StackLayout Padding="20"
+                        Orientation="Horizontal"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Start"
+                        BackgroundColor="White" 
+                        Spacing="20">
+                <Button Text="Adicionar Imagem" Clicked="btAddImgClicked"/>
+                <Button Text="Concluido" TextColor="White" BackgroundColor="Green" Clicked="btConcluidoClicked"/>
+            </StackLayout>
+        </ListView.Footer>
+    </ListView>
+</ContentPage>

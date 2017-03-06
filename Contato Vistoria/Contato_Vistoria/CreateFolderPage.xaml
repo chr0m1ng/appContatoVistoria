@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Contato_Vistoria.CreateFolderPage"
+             xmlns:behaviors="clr-namespace:Contato_Vistoria;assemby=Contato_Vistoria"
+             xmlns:me="clr-namespace:Contato_Vistoria;assembly=Contato_Vistoria"
+             Title="Contato Vistoria"
+             Padding="30, 20, 30, 0"
+             BackgroundColor="White">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Center" Spacing="20">
+            <ScrollView HorizontalOptions="CenterAndExpand">
+                <Label Text="Placa" FontSize="80" TextColor="Blue"/>
+            </ScrollView>
+            <ScrollView Orientation="Horizontal" HorizontalOptions="Center">
+                <StackLayout Orientation="Horizontal">
+                    <Entry Placeholder="AAA" FontSize="40" Keyboard="Text" Text="{Binding EntryText}" x:Name="entryLetras">
+                        <Entry.Behaviors>
+                            <behaviors:EntryLengthValidatorBehavior MaxLength="3"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Label Text="-" FontSize="40"/>
+                    <Entry Placeholder="0000" FontSize="40" Keyboard="Numeric" Text="{Binding EntryText}" x:Name="entryNumeros">
+                        <Entry.Behaviors>
+                            <behaviors:EntryLengthValidatorBehavior MaxLength="4"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+            </ScrollView>
+            <ScrollView>
+                <Button Text="Criar Pasta" FontSize="40" Clicked="btCriarPastaClicked"/>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
