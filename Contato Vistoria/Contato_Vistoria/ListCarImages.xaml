@@ -11,33 +11,14 @@
                 HasUnevenRows="true"
                 
                 IsGroupingEnabled="False"
-                
-                IsPullToRefreshEnabled="true"
-                CachingStrategy="RecycleElement"
-                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
-                RefreshCommand="{Binding RefreshDataCommand}">
-        <!--GroupShortNameBinding="{Binding Key}"-->
-        <!--GroupDisplayBinding="{Binding Key}"-->
-        
-        
-        <!--Built in Cells-->
-        <!--  
-        <ListView.ItemTemplate>
-          <DataTemplate>
-            <TextCell Text="{Binding Text}"
-                      Detail="{Binding Detail}"/>
-          </DataTemplate>
-        </ListView.ItemTemplate>
-        -->
-        <!--Custom View Cells-->
+                CachingStrategy="RecycleElement">
 
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
                     <StackLayout Orientation="Vertical">
                         <StackLayout Orientation="Horizontal" Spacing="5">
-                            <Image Source="{Binding Image}" Aspect="Fill" WidthRequest="100" HeightRequest="60"/>
-                            <Label  Text="{Binding Text}" FontSize="30"/>
+                            <Label  Text="{Binding Text}" FontSize="30" HorizontalOptions="Start"/>
                         </StackLayout>
                     </StackLayout>
                 </ViewCell>
@@ -45,15 +26,19 @@
         </ListView.ItemTemplate>
 
         <ListView.Footer>
-            <StackLayout Padding="20"
-                        Orientation="Horizontal"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Start"
-                        BackgroundColor="White" 
-                        Spacing="20">
-                <Button Text="Adicionar Imagem" Clicked="btAddImgClicked"/>
-                <Button Text="Concluido" TextColor="White" BackgroundColor="Green" Clicked="btConcluidoClicked"/>
-            </StackLayout>
+            <RelativeLayout>
+                
+                <ActivityIndicator Color="Gray" IsRunning="False" IsVisible="False" x:Name="loading"
+                                   RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10"
+                             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=loading, Property=Height, Factor=1, Constant=10}"
+                             RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}">
+                        
+                        <Button Text="Tirar Foto" Clicked="btTirarFotoClicked" x:Name="btTirarFoto"/>
+                        <Button Text="Abrir Galeria" Clicked="btGaleriaClicked" x:Name="btAbrirGaleria"/>
+                        <Button Text="Concluido" TextColor="White" BackgroundColor="Green" Clicked="btConcluidoClicked" x:Name="btConcluido"/>
+                </StackLayout>    
+            </RelativeLayout>
         </ListView.Footer>
     </ListView>
 </ContentPage>

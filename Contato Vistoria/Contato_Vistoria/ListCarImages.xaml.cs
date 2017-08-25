@@ -1,57 +1,126 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Plugin.Media;
-using System.IO;
-using System.Net;
-using MvvmCross.Platform;
+using System.Globalization;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Contato_Vistoria
 {
+
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ListCarImages : ContentPage
     {
-        private int qtdOutros;
-        private List<string> tiposImg;
         private string placa;
-        public ListCarImages(string placa)
+        private string server;
+        private string user;
+        private string pass;
+        private string subDir;
+        private List<bool> isUploading;
+
+        public ListCarImages(string placa, string server, string user, string pass)
         {
             InitializeComponent();
             BindingContext = new ListCarImagesViewModel();
-            qtdOutros = 1;
-            tiposImg = new List<string>();
-            tiposImg.AddRange(new string[] { "Chassi", "Motor", "Frente", "Traseira", "Etiquetas", "Vidro" , "Lacre", "Placa", "Hodometro", "Outros" });
             this.placa = placa;
+            this.server = server;
+            this.user = user;
+            this.pass = pass;
+
+            isUploading = new List<bool>();
+
+            DateTime data = DateTime.Today;
+            var mesNome = DateTimeFormatInfo.CurrentInfo.GetMonthName(data.Month);
+
+            subDir = "/" + data.Year + "/" + data.Month + "-" + mesNome + "/" + data.Day + "-" + data.Month + "-" + data.Year + "/" + placa;
+
+            DependencyService.Get<IFtpWebRequest>().createDir(server, user, pass, "/" + data.Year);
+            DependencyService.Get<IFtpWebRequest>().createDir(server, user, pass, "/" + data.Year + "/" + data.Month + "-" + mesNome);
+            DependencyService.Get<IFtpWebRequest>().createDir(server, user, pass, "/" + data.Year + "/" + data.Month + "-" + mesNome + "/" + data.Day + "-" + data.Month + "-" + data.Year);
+            DependencyService.Get<IFtpWebRequest>().createDir(server, user, pass, subDir);
         }
 
         void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
             => ((ListView)sender).SelectedItem = null;
 
-        async void Handle_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        void Handle_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem == null)
                 return;
-
-            await DisplayAlert("Selected", e.SelectedItem.ToString(), "OK");
-
             //Deselect Item
             ((ListView)sender).SelectedItem = null;
         }
 
-        protected async void btAddImgClicked(object sender, EventArgs e)
+        protected async void btGaleriaClicked(object sender, EventArgs e)
         {
-            var action = await DisplayActionSheet("Tipo de Imagem", "Cancelar", null, tiposImg.ToArray());
-
-            if (!action.Equals("Cancelar"))
+            try
             {
+                var ListItems = ((ListCarImagesViewModel)BindingContext).Items;
+
+                await CrossMedia.Current.Initialize();
+
+                if (!CrossMedia.Current.IsPickPhotoSupported)
+                {
+                    await DisplayAlert("Sem Galeria", ":( Erro na Galeria.", "OK");
+                    return;
+                }
+
+                loading.IsRunning = true;
+                loading.IsVisible = true;
+                btTirarFoto.IsEnabled = false;
+                btAbrirGaleria.IsEnabled = false;
+                btConcluido.IsEnabled = false;
+                var arquivo = await CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions
+                {
+                    PhotoSize = Plugin.Media.Abstractions.PhotoSize.Full
+                });
+
+                if (arquivo == null)
+                {
+                    loading.IsRunning = false;
+                    loading.IsVisible = false;
+                    btTirarFoto.IsEnabled = true;
+                    btAbrirGaleria.IsEnabled = true;
+                    btConcluido.IsEnabled = true;
+                    return;
+                }
+
+                else
+                {
+                    String unixTimestamp = DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Millisecond.ToString();
+                    ListItems.Add(new ListCarImagesViewModel.Item { Text = unixTimestamp, Image = arquivo.Path });
+                    int current = ListItems.Count - 1;
+                    btTirarFoto.IsEnabled = true;
+                    btAbrirGaleria.IsEnabled = true;
+                    btConcluido.IsEnabled = true;
+                    isUploading.Add(true);
+                    await Task.Run(() => DependencyService.Get<IFtpWebRequest>().upload(server, ListItems[current].Image, user, pass, subDir));
+                    isUploading[current] = false;
+                }
+
+                loading.IsRunning = false;
+                loading.IsVisible = false;
+
+            }
+            catch(Exception err)
+            {
+                await DisplayAlert("Erro Adicionar Imagem",err.ToString(), "Ok");
+            }
+        }
+
+        protected async void btTirarFotoClicked(object sender, EventArgs e)
+        {
+            try
+            {
+                var ListItems = ((ListCarImagesViewModel)BindingContext).Items;
+
+                String unixTimestamp = DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Millisecond.ToString();
+
                 await CrossMedia.Current.Initialize();
 
                 if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
@@ -60,57 +129,92 @@ namespace Contato_Vistoria
                     return;
                 }
 
-                if (action.Equals("Outros") && qtdOutros > 1)
+                if (!CrossMedia.Current.IsTakePhotoSupported)
                 {
-                    action = action + " " + qtdOutros.ToString();
-                    qtdOutros++;
+                    await DisplayAlert("Sem Camera", ":( Erro na Camera.", "OK");
+                    return;
                 }
 
-                else if (action.Equals("Outros"))
-                    qtdOutros++;
-
+                loading.IsRunning = true;
+                loading.IsVisible = true;
+                btTirarFoto.IsEnabled = false;
+                btAbrirGaleria.IsEnabled = false;
+                btConcluido.IsEnabled = false;
                 var arquivo = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
                 {
+                    AllowCropping = true,
+                    SaveToAlbum = true,
                     Directory = placa,
-                    Name = action + ".jpg"
+                    Name = unixTimestamp
                 });
 
-                await DisplayAlert("Salvo no Celular", "Imagem Salva no Celular", "Ok");
-
                 if (arquivo == null)
+                {
+                    loading.IsRunning = false;
+                    loading.IsVisible = false;
+                    btTirarFoto.IsEnabled = true;
+                    btAbrirGaleria.IsEnabled = true;
+                    btConcluido.IsEnabled = true;
                     return;
+                }
+                else
+                {
 
-                ((ListCarImagesViewModel)BindingContext).Items.Add(new ListCarImagesViewModel.Item { Text = action, Image = arquivo.Path });
+                    ListItems.Add(new ListCarImagesViewModel.Item { Text = unixTimestamp, Image = arquivo.Path});
+                    int current = ListItems.Count - 1;
+                    btTirarFoto.IsEnabled = true;
+                    btAbrirGaleria.IsEnabled = true;
+                    btConcluido.IsEnabled = true;
+                    isUploading.Add(true);
+                    await Task.Run(() => DependencyService.Get<IFtpWebRequest>().upload(server, ListItems[current].Image, user, pass, subDir));
+                    isUploading[current] = false;
+                }
 
+                loading.IsRunning = false;
+                loading.IsVisible = false;
+                btTirarFoto.IsEnabled = true;
+                btAbrirGaleria.IsEnabled = true;
+                btConcluido.IsEnabled = true;
             }
-            if (!action.Equals("Outros"))
-                tiposImg.Remove(action);
+            catch (Exception err)
+            {
+                await DisplayAlert("Erro Adicionar Imagem", err.ToString(), "Ok");
+            }
         }
 
         protected async void btConcluidoClicked(object sender, EventArgs e)
         {
-            /*
-            foreach(var item in ((ListCarImagesViewModel)BindingContext).Items)
+            try
             {
-                File img = new File(item.Image);
-                img.Delete();
+                var ListItems = ((ListCarImagesViewModel)BindingContext).Items;
+                if (ListItems.Count > 0)
+                {
+                    loading.IsRunning = true;
+                    loading.IsVisible = true;
+                    btTirarFoto.IsEnabled = false;
+                    btAbrirGaleria.IsEnabled = false;
+                    btConcluido.IsEnabled = false;
+                    await Task.Delay(1000);
+                    if (Device.OS == TargetPlatform.Android || Device.OS == TargetPlatform.iOS)
+                    {
+                        while (!isUploading.All(x => x == false));
 
+                        await DisplayAlert("Upload", "Upload de fotos realizado com sucesso! :) (Por Segurança, Favor Checar se já está no servidor)", "Ok");
+                    }
+                    loading.IsRunning = false;
+                    loading.IsVisible = false;
+                    btTirarFoto.IsEnabled = true;
+                    btAbrirGaleria.IsEnabled = true;
+                    btConcluido.IsEnabled = true;
+
+                }
+                await Navigation.PopAsync();
             }
-            */
-
-            await Navigation.PopAsync();
+            catch (Exception err)
+            {
+                await DisplayAlert("Erro Upload", err.ToString(), "Ok");
+            }
         }
-
-        /*
-        public void UploadFile(string pathFile)
-        {
-            FtpWebRequest webReq = (FtpWebRequest)WebRequest.Create("ftp://192.168.0.102");
-            webReq.Credentials = new NetworkCredential("gabrielrsantoss@outlook.com", "32562033Ga");
-            webReq.Method = "I don't know that to put in here, i have no WebRequestMethods class...";
-            Stream
-            
-        }
-        */
     }
 
 
@@ -118,44 +222,10 @@ namespace Contato_Vistoria
     class ListCarImagesViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<Item> Items { get; }
-        public ObservableCollection<Grouping<string, Item>> ItemsGrouped { get; }
         public ListCarImagesViewModel()
         {
             Items = new ObservableCollection<Item>();
-
-            var sorted = from item in Items
-                         orderby item.Text
-                         group item by item.Text[0].ToString() into itemGroup
-                         select new Grouping<string, Item>(itemGroup.Key, itemGroup);
-
-            ItemsGrouped = new ObservableCollection<Grouping<string, Item>>(sorted);
-
-            RefreshDataCommand = new Command(async () => await RefreshData());
         }
-
-        public ICommand RefreshDataCommand { get; }
-
-        async Task RefreshData()
-        {
-            IsBusy = true;
-            //Load Data Here
-            await Task.Delay(2000);
-
-            IsBusy = false;
-        }
-
-        bool busy;
-        public bool IsBusy
-        {
-            get { return busy; }
-            set
-            {
-                busy = value;
-                OnPropertyChanged();
-                ((Command)RefreshDataCommand).ChangeCanExecute();
-            }
-        }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
         void OnPropertyChanged([CallerMemberName]string propertyName = "") =>
@@ -166,19 +236,7 @@ namespace Contato_Vistoria
             public string Image { get; set; }
             public string Text { get; set; }
 
-            public override string ToString() => Text;
-        }
-
-        public class Grouping<K, T> : ObservableCollection<T>
-        {
-            public K Key { get; private set; }
-
-            public Grouping(K key, IEnumerable<T> items)
-            {
-                Key = key;
-                foreach (var item in items)
-                    this.Items.Add(item);
-            }
+            public override string ToString() => Image;
         }
     }
 }

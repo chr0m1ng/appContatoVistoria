@@ -12,7 +12,6 @@ namespace Contato_Vistoria
         public App()
         {
             InitializeComponent();
-
             MainPage = new NavigationPage(new CreateFolderPage());
         }
 

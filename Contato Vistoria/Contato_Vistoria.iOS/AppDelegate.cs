@@ -4,6 +4,8 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using System.IO;
+using System.Net;
 
 namespace Contato_Vistoria.iOS
 {
