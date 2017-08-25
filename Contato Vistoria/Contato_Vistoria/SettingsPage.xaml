@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Contato_Vistoria.SettingsPage"
+             Padding="10, 20, 10, 0"
+             Title="Opções">
+    <ScrollView>
+        <RelativeLayout>
+
+            <Label Text="FTP Server" FontSize="30" TextColor="Blue" x:Name="lbServer"
+                   RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=1}"/>
+
+            <StackLayout x:Name="ServerFinalPos">
+                <ContentView HeightRequest="{Binding Source={x:Reference lbServer}, Path=Y}"/>
+                <ContentView HeightRequest="{Binding Source={x:Reference lbServer}, Path=Height}"/>
+            </StackLayout>
+
+            <Entry Placeholder="ftp://192.168.1.19" FontSize="20" WidthRequest="300" Text="ftp://192.168.1.19" x:Name="entryServer"
+                   RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=ServerFinalPos, Property=Height, Factor=1}"
+                   RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"/>
+
+            <StackLayout x:Name="EntryServerFinalPos">
+                <ContentView HeightRequest="{Binding Source={x:Reference entryServer}, Path=Y}"/>
+                <ContentView HeightRequest="{Binding Source={x:Reference entryServer}, Path=Height}"/>
+            </StackLayout>
+
+            <Label Text="User" FontSize="30" TextColor="Blue" x:Name="lbUser"
+                   RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=EntryServerFinalPos, Property=Height, Factor=1}"/>
+
+            <StackLayout x:Name="UserFinalPos">
+                <ContentView HeightRequest="{Binding Source={x:Reference lbUser}, Path=Y}"/>
+                <ContentView HeightRequest="{Binding Source={x:Reference lbUser}, Path=Height}"/>
+            </StackLayout>
+            
+            <Entry Placeholder="gabriel" FontSize="20" WidthRequest="300" Text="gabriel" x:Name="entryUser"
+                   RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=UserFinalPos, Property=Height, Factor=1}"
+                   RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"/>
+
+            <StackLayout x:Name="EntryUserFinalPos">
+                <ContentView HeightRequest="{Binding Source={x:Reference entryUser}, Path=Y}"/>
+                <ContentView HeightRequest="{Binding Source={x:Reference entryUser}, Path=Height}"/>
+            </StackLayout>
+            
+            <Label Text="Pass" FontSize="30" TextColor="Blue" x:Name="lbPass"
+                   RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=EntryUserFinalPos, Property=Height, Factor=1}"/>
+
+            <StackLayout x:Name="PassFinalPos">
+                <ContentView HeightRequest="{Binding Source={x:Reference lbPass}, Path=Y}"/>
+                <ContentView HeightRequest="{Binding Source={x:Reference lbPass}, Path=Height}"/>
+            </StackLayout>
+            
+            <Entry Placeholder="Sua Senha" FontSize="20" WidthRequest="300" IsPassword="True" Text="123" x:Name="entryPass"
+                   RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=PassFinalPos, Property=Height, Factor=1}"
+                   RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"/>
+
+            <StackLayout x:Name="EntryPassFinalPos">
+                <ContentView HeightRequest="{Binding Source={x:Reference entryPass}, Path=Y}"/>
+                <ContentView HeightRequest="{Binding Source={x:Reference entryPass}, Path=Height}"/>
+            </StackLayout>
+            
+            <Button Text="Salvar" FontSize="40" Clicked="btSalvarClicked"
+                    RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=EntryPassFinalPos, Property=Height, Factor=1}"
+                    RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"/>
+            
+        </RelativeLayout>
+    </ScrollView>
+</ContentPage>
