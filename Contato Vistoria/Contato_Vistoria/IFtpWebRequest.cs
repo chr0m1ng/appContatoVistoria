@@ -6,5 +6,6 @@ namespace Contato_Vistoria
     {
         bool upload(string FtpUrl, string fileName, string userName, string password, string UploadDirectory = "");
         bool createDir(string FtpUrl, string userName, string password, string Directory);
+        string getIpExtern();
     }
 }

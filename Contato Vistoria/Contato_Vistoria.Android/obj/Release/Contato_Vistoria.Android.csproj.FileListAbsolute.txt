@@ -1,3 +1,8 @@
+C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\Xamarin.Android.Support.Design.dll
+C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\Xamarin.Android.Support.v7.CardView.dll
+C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\Xamarin.Android.Support.v7.MediaRouter.dll
+C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\Xamarin.Forms.Core.dll
+C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\Xamarin.Forms.Core.pdb
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\Contato_Vistoria.Android.dll
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\Contato_Vistoria.Android.pdb
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\Contato_Vistoria.Android.apk
@@ -12,18 +17,19 @@ C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vi
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\Rg.Plugins.Popup.dll
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\Rg.Plugins.Popup.Droid.dll
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\Rg.Plugins.Popup.Platform.dll
+C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\System.Runtime.Serialization.Json.dll
+C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\System.Runtime.Serialization.Primitives.dll
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\Xamarin.Android.Support.Animated.Vector.Drawable.dll
-C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\Xamarin.Android.Support.Design.dll
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\Xamarin.Android.Support.v4.dll
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\Xamarin.Android.Support.v7.AppCompat.dll
-C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\Xamarin.Android.Support.v7.CardView.dll
-C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\Xamarin.Android.Support.v7.MediaRouter.dll
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\Xamarin.Android.Support.v7.RecyclerView.dll
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\Xamarin.Android.Support.Vector.Drawable.dll
-C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\Xamarin.Forms.Core.dll
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\Xamarin.Forms.Platform.Android.dll
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\Xamarin.Forms.Platform.dll
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\Xamarin.Forms.Xaml.dll
+C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\System.Threading.Tasks.dll
+C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\System.IO.dll
+C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\System.Text.Encoding.dll
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\Contato_Vistoria.pdb
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\FormsViewGroup.pdb
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\FormsViewGroup.dll.mdb
@@ -40,7 +46,6 @@ C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vi
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\Plugin.Permissions.Abstractions.pdb
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\Plugin.Permissions.Abstractions.xml
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\Plugin.Permissions.Abstractions.dll.mdb
-C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\Xamarin.Forms.Core.pdb
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\Xamarin.Forms.Core.xml
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\Xamarin.Forms.Core.dll.mdb
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\Xamarin.Forms.Platform.Android.pdb
@@ -78,6 +83,7 @@ C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vi
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\System.ComponentModel.Composition.dll.mdb
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\System.Core.dll.mdb
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\System.dll.mdb
+C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\System.Json.dll.mdb
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\System.Net.Http.dll.mdb
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\System.Runtime.Serialization.dll.mdb
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\bin\Release\System.ServiceModel.Internals.dll.mdb
@@ -96,6 +102,7 @@ C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vi
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\obj\Release\android\assets\Plugin.Permissions.dll.mdb
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\obj\Release\android\assets\System.Core.dll.mdb
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\obj\Release\android\assets\System.dll.mdb
+C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\obj\Release\android\assets\System.Json.dll.mdb
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\obj\Release\android\assets\System.Net.Http.dll.mdb
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\obj\Release\android\assets\System.Runtime.Serialization.dll.mdb
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\obj\Release\android\assets\System.ServiceModel.Internals.dll.mdb

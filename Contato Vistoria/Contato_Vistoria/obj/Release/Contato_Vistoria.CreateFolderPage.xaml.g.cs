@@ -38,6 +38,15 @@ namespace Contato_Vistoria {
         private global::Xamarin.Forms.StackLayout EntryFinalPos;
         
         [System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
+        private global::Xamarin.Forms.Button btCriarPasta;
+        
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
+        private global::Xamarin.Forms.StackLayout btCriarPastaFinalPos;
+        
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
+        private global::Xamarin.Forms.Switch switchMegaLaudo;
+        
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
         private void InitializeComponent() {
             this.LoadFromXaml(typeof(CreateFolderPage));
             imgLogo = this.FindByName<global::Xamarin.Forms.Image>("imgLogo");
@@ -47,6 +56,9 @@ namespace Contato_Vistoria {
             entryLetras = this.FindByName<global::Xamarin.Forms.Entry>("entryLetras");
             entryNumeros = this.FindByName<global::Xamarin.Forms.Entry>("entryNumeros");
             EntryFinalPos = this.FindByName<global::Xamarin.Forms.StackLayout>("EntryFinalPos");
+            btCriarPasta = this.FindByName<global::Xamarin.Forms.Button>("btCriarPasta");
+            btCriarPastaFinalPos = this.FindByName<global::Xamarin.Forms.StackLayout>("btCriarPastaFinalPos");
+            switchMegaLaudo = this.FindByName<global::Xamarin.Forms.Switch>("switchMegaLaudo");
         }
     }
 }

@@ -44,9 +44,22 @@
                     <ContentView HeightRequest="{Binding Source={x:Reference entry}, Path=Height}"/>
                 </StackLayout>
 
-                <Button Text="Criar Pasta" FontSize="40" Clicked="btCriarPastaClicked"
+                <Button Text="Criar Pasta" FontSize="40" Clicked="btCriarPastaClicked" x:Name="btCriarPasta"
                         RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=EntryFinalPos, Property=Height, Factor=1}" 
                         RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"/>
+
+                <StackLayout x:Name="btCriarPastaFinalPos">
+                    <ContentView HeightRequest="{Binding Source={x:Reference btCriarPasta}, Path=Y}"/>
+                    <ContentView HeightRequest="{Binding Source={x:Reference btCriarPasta}, Path=Height}"/>
+                </StackLayout>
+
+
+                <Label Text="MegaLaudo"
+                       RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=btCriarPastaFinalPos, Property=Height, Factor=1, Constant=10}" 
+                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.2}"/>
+                <Switch x:Name="switchMegaLaudo"
+                        RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=btCriarPastaFinalPos, Property=Height, Factor=1, Constant=10}" 
+                        RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5}"/>
 
                 <Grid HorizontalOptions="End" 
                       RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.88}" 
@@ -58,7 +71,7 @@
                         <ColumnDefinition Width="60"/>
                     </Grid.ColumnDefinitions>
                     <Image Source="opcoesIco.png" WidthRequest="60" HeightRequest="60"/>
-                    <Button Text="Opções" HeightRequest="60" WidthRequest="60" Clicked="btOpcoesClicked" Opacity="0.1" BorderRadius="35"/>
+                    <Button Text="" HeightRequest="60" WidthRequest="60" Clicked="btOpcoesClicked" Opacity="0.1" BorderRadius="35"/>
                 </Grid>
             </RelativeLayout>
         </ScrollView>

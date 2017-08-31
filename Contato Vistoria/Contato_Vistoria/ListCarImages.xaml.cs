@@ -197,7 +197,8 @@ namespace Contato_Vistoria
                     await Task.Delay(1000);
                     if (Device.OS == TargetPlatform.Android || Device.OS == TargetPlatform.iOS)
                     {
-                        while (!isUploading.All(x => x == false));
+                        while (!isUploading.All(x => x == false))
+                            await Task.Delay(1000);
 
                         await DisplayAlert("Upload", "Upload de fotos realizado com sucesso! :) (Por Segurança, Favor Checar se já está no servidor)", "Ok");
                     }

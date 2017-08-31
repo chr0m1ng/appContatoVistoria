@@ -3,7 +3,7 @@ using System.IO;
 using System.Net;
 using Contato_Vistoria.Droid;
 using System.Threading.Tasks;
-using System.Collections.Generic;
+using System.Json;
 
 [assembly: Xamarin.Forms.Dependency(typeof(FTP))]
 namespace Contato_Vistoria.Droid
@@ -54,7 +54,7 @@ namespace Contato_Vistoria.Droid
 
 
             }
-            catch (Exception err)
+            catch
             {
                 return false;
             }
@@ -91,6 +91,38 @@ namespace Contato_Vistoria.Droid
                 }
             }
 
+        }
+       
+
+        public string getIpExtern()
+        {
+            string url = "https://api.myjson.com/bins/123g9p";
+
+            JsonValue json = FetchIP(url);
+
+            return json["ip"];
+        }
+
+        private JsonValue FetchIP(string url)
+        {
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(url));
+            request.ContentType = "application/json";
+            request.Method = "GET";
+
+            // Send the request to the server and wait for the response:
+            using (WebResponse response = request.GetResponse())
+            {
+                // Get a stream representation of the HTTP web response:
+                using (Stream stream = response.GetResponseStream())
+                {
+                    // Use this stream to build a JSON document object:
+                    JsonValue jsonDoc = Task.Run(() => JsonObject.Load(stream)).Result;
+                    Console.Out.WriteLine("Response: {0}", jsonDoc.ToString());
+
+                    // Return the JSON document:
+                    return jsonDoc;
+                }
+            }
         }
 
 

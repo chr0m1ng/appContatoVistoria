@@ -31,6 +31,7 @@ namespace Contato_Vistoria
             {
                 entryLetras.Text = "";
                 entryNumeros.Text = "";
+                switchMegaLaudo.IsToggled = false;
 
                 if (ListPage != null)
                     ListPage = null;
@@ -49,7 +50,17 @@ namespace Contato_Vistoria
             {
                 if (entryLetras.Text.Length == 3 && entryNumeros.Text.Length == 4)
                 {
-                    ListPage = new ListCarImages(entryLetras.Text + "-" + entryNumeros.Text, Settings.server, Settings.user, Settings.pass);    
+                    if(switchMegaLaudo.IsToggled)
+                    {
+                        string myIp = DependencyService.Get<IFtpWebRequest>().getIpExtern();
+                        await DisplayAlert("IP", myIp, "Ok");
+                        ListPage = new ListCarImages(entryLetras.Text + "-" + entryNumeros.Text + " - MEGALAUDO", "ftp://" + myIp, Settings.user, Settings.pass);
+                    }
+                    else
+                        ListPage = new ListCarImages(entryLetras.Text + "-" + entryNumeros.Text, Settings.server, Settings.user, Settings.pass);
+                    entryLetras.Text = "";
+                    entryNumeros.Text = "";
+                    switchMegaLaudo.IsToggled = false;
                     await Navigation.PushAsync(ListPage);
                 }
                 else

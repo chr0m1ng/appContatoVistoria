@@ -27,6 +27,7 @@ C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vi
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\obj\Release\android\assets\mscorlib.dll
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\obj\Release\android\assets\System.Core.dll
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\obj\Release\android\assets\System.dll
+C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\obj\Release\android\assets\System.Json.dll
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\obj\Release\android\assets\System.Xml.dll
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\obj\Release\android\assets\System.Runtime.dll
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.Android\obj\Release\android\assets\System.Resources.ResourceManager.dll

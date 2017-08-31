@@ -2,6 +2,7 @@ C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vi
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria\bin\Release\Contato_Vistoria.pdb
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria\bin\Release\Plugin.Media.Abstractions.dll
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria\bin\Release\Plugin.Media.dll
+C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria\bin\Release\Windows.Foundation.UniversalApiContract.winmd
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria\bin\Release\Xamarin.Forms.Core.dll
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria\bin\Release\Xamarin.Forms.Platform.dll
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria\bin\Release\Xamarin.Forms.Xaml.dll
@@ -14,7 +15,6 @@ C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vi
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria\bin\Release\Xamarin.Forms.Platform.pdb
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria\bin\Release\Xamarin.Forms.Xaml.pdb
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria\bin\Release\Xamarin.Forms.Xaml.xml
-C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria\obj\Release\Contato_Vistoria.csprojResolveAssemblyReference.cache
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria\obj\Release\Contato_Vistoria.App.xaml.g.cs
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria\obj\Release\Contato_Vistoria.CreateFolderPage.xaml.g.cs
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria\obj\Release\Contato_Vistoria.ListCarImages.xaml.g.cs
