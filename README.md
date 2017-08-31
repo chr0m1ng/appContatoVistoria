@@ -1,0 +1,6 @@
+# Aplicativo Contato Vistoria
+O aplicativo foi feito em Xamarin, a aplicação Android está funcionando corretamente, a iOS em sua grande parte, nos ultimos testes feitos estava Ok, o UWP não foi implementado o FTP, portanto não funciona, provavelmente somente a parte de interface grafica mesmo.
+
+## O que ele faz?
+As vistorias automotivas eram feitas nos smartphones de OS Android e em seguida tinha que ser passado o celular para dentro do escritorio, i.e. retirado da mão do vistoriador e passado para o digitador, para então transferir as fotos da vistoria via cabo para o computador, criar as pastas de destino no computador e etc. Com o aplicativo isto não é mais necessario, ao iniciar uma vistoria é informado na pagina principal do aplicativo a placa do carro e automaticamente é criado uma pasta no Ano/Mês/Dia/Placa, no computador/servidor, referente ao carro, aparece as opções de tirar foto ou escolher da galeria e assim que cada foto é tirada/escolhida da biblioteca ela já é transferida via FTP para o Servidor na pasta do veiculo. Você pode configurar seu servidor para ter acesso de fora da rede local e depois mudar apenas a conexão no aplicativo(tem que alterar toda vez que fechar) ou direto no codigo(permanente). 
+Sinta-se livre para uso.
