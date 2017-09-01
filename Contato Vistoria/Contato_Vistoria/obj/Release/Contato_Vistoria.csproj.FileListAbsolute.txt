@@ -21,13 +21,3 @@ C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vi
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria\obj\Release\Contato_Vistoria.SettingsPage.xaml.g.cs
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria\obj\Release\Contato_Vistoria.dll
 C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria\obj\Release\Contato_Vistoria.pdb
-C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria\obj\Release\Contato_Vistoria.dll.mdb
-C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria\bin\Release\Contato_Vistoria.dll.mdb
-C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria\obj\Release\Contato_Vistoria.dll.mdb
-C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria\bin\Release\Contato_Vistoria.dll.mdb
-C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria\obj\Release\Contato_Vistoria.dll.mdb
-C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria\bin\Release\Contato_Vistoria.dll.mdb
-C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria\obj\Release\Contato_Vistoria.dll.mdb
-C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria\bin\Release\Contato_Vistoria.dll.mdb
-C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria\obj\Release\Contato_Vistoria.dll.mdb
-C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria\bin\Release\Contato_Vistoria.dll.mdb

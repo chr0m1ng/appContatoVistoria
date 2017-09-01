@@ -14,6 +14,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Storage;
+using System.Threading.Tasks;
 
 namespace Contato_Vistoria.UWP
 {
@@ -102,6 +104,11 @@ namespace Contato_Vistoria.UWP
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+
+            StorageFolder folder = ApplicationData.Current.LocalFolder;
+
+            Task.Run(async () => await folder.DeleteAsync());
         }
+
     }
 }

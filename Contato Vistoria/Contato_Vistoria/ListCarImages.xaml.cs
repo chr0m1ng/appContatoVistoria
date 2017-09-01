@@ -32,6 +32,7 @@ namespace Contato_Vistoria
             this.user = user;
             this.pass = pass;
 
+
             isUploading = new List<bool>();
 
             DateTime data = DateTime.Today;
@@ -195,13 +196,11 @@ namespace Contato_Vistoria
                     btAbrirGaleria.IsEnabled = false;
                     btConcluido.IsEnabled = false;
                     await Task.Delay(1000);
-                    if (Device.OS == TargetPlatform.Android || Device.OS == TargetPlatform.iOS)
-                    {
-                        while (!isUploading.All(x => x == false))
-                            await Task.Delay(1000);
 
-                        await DisplayAlert("Upload", "Upload de fotos realizado com sucesso! :) (Por Segurança, Favor Checar se já está no servidor)", "Ok");
-                    }
+                    while (!isUploading.All(x => x == false))
+                        await Task.Delay(1000);
+
+                    await DisplayAlert("Upload", "Upload de fotos realizado com sucesso! :) (Por Segurança, Favor Checar se já está no servidor)", "Ok");
                     loading.IsRunning = false;
                     loading.IsVisible = false;
                     btTirarFoto.IsEnabled = true;

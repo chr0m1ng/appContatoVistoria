@@ -1,0 +1,2 @@
+C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria.UWP\Contato_Vistoria.UWP.csproj;x86
+C:\Users\gabri\Documents\Visual Studio 2017\Projects\Contato Vistoria\Contato Vistoria\Contato_Vistoria\Contato_Vistoria.csproj;neutral
