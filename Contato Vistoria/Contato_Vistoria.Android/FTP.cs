@@ -34,7 +34,7 @@ namespace Contato_Vistoria.Droid
                 req.Credentials = new NetworkCredential(userName, password);
                 req.UseBinary = true;
                 req.UsePassive = true;
-                req.KeepAlive = false;
+                req.KeepAlive = true;
 
                 byte[] data = File.ReadAllBytes(fileName);
                 req.ContentLength = data.Length;
@@ -46,20 +46,73 @@ namespace Contato_Vistoria.Droid
 
 
                 FtpWebResponse res = (FtpWebResponse)req.GetResponse();
-                string resp = res.StatusDescription;
 
                 res.Close();
 
-                return true;
+                req.KeepAlive = false;
+                req.Abort();
 
 
+                if (res.StatusCode == FtpStatusCode.ClosingControl || res.StatusCode == FtpStatusCode.ClosingData)
+                    return true;
+                else
+                    return false;
             }
             catch
             {
                 return false;
             }
         }
+        
+        public async Task<bool> uploadAsync(string FtpUrl, string fileName, string userName, string password, string UploadDirectory = "")
+        {
+            try
+            {
+                string PureFileName = new FileInfo(fileName).Name;
 
+                String uploadUrl = String.Format("{0}{1}/{2}", FtpUrl, UploadDirectory, PureFileName);
+                FtpWebRequest req = (FtpWebRequest)FtpWebRequest.Create(uploadUrl);
+                req.Proxy = null;
+                req.Method = WebRequestMethods.Ftp.UploadFile;
+                req.Credentials = new NetworkCredential(userName, password);
+                req.UseBinary = true;
+                req.UsePassive = true;
+                req.KeepAlive = true;
+
+                byte[] data = File.ReadAllBytes(fileName);
+                req.ContentLength = data.Length;
+
+                Stream stream = await req.GetRequestStreamAsync();
+                await stream.FlushAsync();
+                await stream.WriteAsync(data, 0, data.Length);
+                stream.Close();
+
+
+                FtpWebResponse res = (FtpWebResponse) await req.GetResponseAsync();
+                string resp = res.StatusDescription;
+
+
+
+                if (res.StatusCode == FtpStatusCode.ClosingControl || res.StatusCode == FtpStatusCode.ClosingData)
+                {
+                    res.Close();
+                    req.Abort();
+                    return true;
+                }
+                else
+                {
+                    res.Close();
+
+                    req.Abort();
+                    return false;
+                }
+            }
+            catch 
+            {
+                return false;
+            }
+        }
+        
         public bool createDir(string FtpUrl, string userName, string password, string Directory)
         {
             try
@@ -72,9 +125,15 @@ namespace Contato_Vistoria.Droid
                 FtpWebResponse response = (FtpWebResponse)reqFTP.GetResponse();
                 Stream ftpStream = response.GetResponseStream();
                 ftpStream.Close();
-                response.Close();
 
-                return true;
+                response.Close();
+                reqFTP.Abort();
+
+                if(response.StatusCode == FtpStatusCode.ActionNotTakenFileUnavailable || response.StatusCode == FtpStatusCode.ClosingControl)
+                    return true;
+                else
+                    return false;
+
             }
             catch(WebException ex)
             {
@@ -92,8 +151,44 @@ namespace Contato_Vistoria.Droid
             }
 
         }
-       
+        /*
+        public async Task<bool> createDirAsync(string FtpUrl, string userName, string password, string Directory)
+        {   
+            try
+            {
+                FtpWebRequest reqFTP = (FtpWebRequest)FtpWebRequest.Create(new Uri(FtpUrl + Directory));
+                reqFTP.Method = WebRequestMethods.Ftp.MakeDirectory;
+                reqFTP.KeepAlive = false;
+                reqFTP.UseBinary = true;
+                reqFTP.Credentials = new NetworkCredential(userName, password);
+                FtpWebResponse response = (FtpWebResponse) await reqFTP.GetResponseAsync();
+                Stream ftpStream = response.GetResponseStream();
+                ftpStream.Close();
+                if (response.StatusCode == FtpStatusCode.CommandOK || response.StatusCode == FtpStatusCode.FileActionOK)
+                {
+                    response.Close();
+                    return true;
+                }
+                else
+                {
+                    response.Close();
+                    return false;
+                }
 
+            }
+            catch (WebException ex)
+            {
+                FtpWebResponse response = (FtpWebResponse)ex.Response;
+                if (response.StatusCode == FtpStatusCode.ActionNotTakenFileUnavailable)
+                {
+                    response.Close();
+                    return false;
+                }
+                return false;
+            }
+
+        }
+        */
         public string getIpExtern()
         {
             string url = "https://api.myjson.com/bins/123g9p";

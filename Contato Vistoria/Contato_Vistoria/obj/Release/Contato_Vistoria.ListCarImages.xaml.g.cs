@@ -17,6 +17,15 @@ namespace Contato_Vistoria {
     public partial class ListCarImages : global::Xamarin.Forms.ContentPage {
         
         [System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
+        private global::Xamarin.Forms.ListView mylistview;
+        
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
+        private global::Xamarin.Forms.Label contador;
+        
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
+        private global::Xamarin.Forms.StackLayout contadorFinalY;
+        
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
         private global::Xamarin.Forms.ActivityIndicator loading;
         
         [System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
@@ -31,6 +40,9 @@ namespace Contato_Vistoria {
         [System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
         private void InitializeComponent() {
             this.LoadFromXaml(typeof(ListCarImages));
+            mylistview = this.FindByName<global::Xamarin.Forms.ListView>("mylistview");
+            contador = this.FindByName<global::Xamarin.Forms.Label>("contador");
+            contadorFinalY = this.FindByName<global::Xamarin.Forms.StackLayout>("contadorFinalY");
             loading = this.FindByName<global::Xamarin.Forms.ActivityIndicator>("loading");
             btTirarFoto = this.FindByName<global::Xamarin.Forms.Button>("btTirarFoto");
             btAbrirGaleria = this.FindByName<global::Xamarin.Forms.Button>("btAbrirGaleria");

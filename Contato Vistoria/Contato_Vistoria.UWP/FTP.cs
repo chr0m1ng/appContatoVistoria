@@ -92,6 +92,9 @@ namespace Contato_Vistoria.UWP
             return js.GetNamedString("ip");
         }
 
-
+        public Task<bool> uploadAsync(string FtpUrl, string fileName, string userName, string password, string UploadDirectory = "")
+        {
+            throw new NotImplementedException();
+        }
     }
 }

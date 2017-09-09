@@ -21,7 +21,9 @@ namespace Contato_Vistoria
         private string user;
         private string pass;
         private string subDir;
-        private List<bool> isUploading;
+        private List<bool> uploading;
+        private bool erros = false;
+        private int qtdErro = 0;
 
         public ListCarImages(string placa, string server, string user, string pass)
         {
@@ -32,18 +34,33 @@ namespace Contato_Vistoria
             this.user = user;
             this.pass = pass;
 
-
-            isUploading = new List<bool>();
+            uploading = new List<bool>();
 
             DateTime data = DateTime.Today;
             var mesNome = DateTimeFormatInfo.CurrentInfo.GetMonthName(data.Month);
 
             subDir = "/" + data.Year + "/" + data.Month + "-" + mesNome + "/" + data.Day + "-" + data.Month + "-" + data.Year + "/" + placa;
 
-            DependencyService.Get<IFtpWebRequest>().createDir(server, user, pass, "/" + data.Year);
-            DependencyService.Get<IFtpWebRequest>().createDir(server, user, pass, "/" + data.Year + "/" + data.Month + "-" + mesNome);
-            DependencyService.Get<IFtpWebRequest>().createDir(server, user, pass, "/" + data.Year + "/" + data.Month + "-" + mesNome + "/" + data.Day + "-" + data.Month + "-" + data.Year);
-            DependencyService.Get<IFtpWebRequest>().createDir(server, user, pass, subDir);
+            if (!DependencyService.Get<IFtpWebRequest>().createDir(server, user, pass, "/" + data.Year))
+            {
+                Navigation.PopAsync();
+                DisplayAlert("erro", "erro ao criar pasta", "Ok");
+            }
+            if(!DependencyService.Get<IFtpWebRequest>().createDir(server, user, pass, "/" + data.Year + "/" + data.Month + "-" + mesNome))
+            {
+                Navigation.PopAsync();
+                DisplayAlert("erro", "erro ao criar pasta", "Ok");
+            }
+            if (!DependencyService.Get<IFtpWebRequest>().createDir(server, user, pass, "/" + data.Year + "/" + data.Month + "-" + mesNome + "/" + data.Day + "-" + data.Month + "-" + data.Year))
+            {
+                Navigation.PopAsync();
+                DisplayAlert("erro", "erro ao criar pasta", "Ok");
+            }
+            if (!DependencyService.Get<IFtpWebRequest>().createDir(server, user, pass, subDir))
+            {
+                Navigation.PopAsync();
+                DisplayAlert("erro", "erro ao criar pasta", "Ok");
+            }
         }
 
         void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
@@ -53,7 +70,7 @@ namespace Contato_Vistoria
         {
             if (e.SelectedItem == null)
                 return;
-            //Deselect Item
+            DisplayAlert("Ta upando?", ((ListCarImagesViewModel.Item)((ListView)sender).SelectedItem).Uploading.ToString(), "Ok");
             ((ListView)sender).SelectedItem = null;
         }
 
@@ -70,47 +87,68 @@ namespace Contato_Vistoria
                     await DisplayAlert("Sem Galeria", ":( Erro na Galeria.", "OK");
                     return;
                 }
-
-                loading.IsRunning = true;
-                loading.IsVisible = true;
-                btTirarFoto.IsEnabled = false;
-                btAbrirGaleria.IsEnabled = false;
-                btConcluido.IsEnabled = false;
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    loading.IsRunning = true;
+                    loading.IsVisible = true;
+                    btTirarFoto.IsEnabled = false;
+                    btAbrirGaleria.IsEnabled = false;
+                    btConcluido.IsEnabled = false;
+                });
                 var arquivo = await CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions
                 {
                     PhotoSize = Plugin.Media.Abstractions.PhotoSize.Full
                 });
 
-                if (arquivo == null)
+                Device.BeginInvokeOnMainThread(() => 
                 {
-                    loading.IsRunning = false;
-                    loading.IsVisible = false;
                     btTirarFoto.IsEnabled = true;
                     btAbrirGaleria.IsEnabled = true;
                     btConcluido.IsEnabled = true;
+                });
+
+                if (arquivo == null)
+                {
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        loading.IsRunning = false;
+                        loading.IsVisible = false;
+                    });
                     return;
                 }
 
                 else
                 {
                     String unixTimestamp = DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Millisecond.ToString();
-                    ListItems.Add(new ListCarImagesViewModel.Item { Text = unixTimestamp, Image = arquivo.Path });
-                    int current = ListItems.Count - 1;
-                    btTirarFoto.IsEnabled = true;
-                    btAbrirGaleria.IsEnabled = true;
-                    btConcluido.IsEnabled = true;
-                    isUploading.Add(true);
-                    await Task.Run(() => DependencyService.Get<IFtpWebRequest>().upload(server, ListItems[current].Image, user, pass, subDir));
-                    isUploading[current] = false;
+                    await Task.Run(() =>
+                    {
+                        ListItems.Add(new ListCarImagesViewModel.Item { Text = unixTimestamp, Image = arquivo.Path, Uploading = true });
+                        int current = ListItems.Count - 1;
+
+                        bool resp = DependencyService.Get<IFtpWebRequest>().uploadAsync(server, ListItems[current].Image, user, pass, subDir).Result;
+
+                        Task.Delay(2000);
+
+                        Device.BeginInvokeOnMainThread(() =>
+                        {
+                            ListItems.ElementAt(current).Uploading = false;
+                            loading.IsRunning = false;
+                            loading.IsVisible = false;
+                        });
+
+                        if (!resp)
+                        {
+                            erros = true;
+                            qtdErro++;
+                        }
+                        uploading.Add(resp);
+                        return;
+                    });
                 }
-
-                loading.IsRunning = false;
-                loading.IsVisible = false;
-
             }
-            catch(Exception err)
+            catch (Exception err)
             {
-                await DisplayAlert("Erro Adicionar Imagem",err.ToString(), "Ok");
+                await DisplayAlert("Erro Adicionar Imagem", err.ToString(), "Ok");
             }
         }
 
@@ -135,12 +173,15 @@ namespace Contato_Vistoria
                     await DisplayAlert("Sem Camera", ":( Erro na Camera.", "OK");
                     return;
                 }
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    loading.IsRunning = true;
+                    loading.IsVisible = true;
+                    btTirarFoto.IsEnabled = false;
+                    btAbrirGaleria.IsEnabled = false;
+                    btConcluido.IsEnabled = false;
+                });
 
-                loading.IsRunning = true;
-                loading.IsVisible = true;
-                btTirarFoto.IsEnabled = false;
-                btAbrirGaleria.IsEnabled = false;
-                btConcluido.IsEnabled = false;
                 var arquivo = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
                 {
                     AllowCropping = true,
@@ -149,33 +190,51 @@ namespace Contato_Vistoria
                     Name = unixTimestamp
                 });
 
-                if (arquivo == null)
+                Device.BeginInvokeOnMainThread(() =>
                 {
-                    loading.IsRunning = false;
-                    loading.IsVisible = false;
                     btTirarFoto.IsEnabled = true;
                     btAbrirGaleria.IsEnabled = true;
                     btConcluido.IsEnabled = true;
+                });
+
+                if (arquivo == null)
+                {
+                    Device.BeginInvokeOnMainThread(() => 
+                    {
+                        loading.IsRunning = false;
+                        loading.IsVisible = false;
+                    });
                     return;
                 }
                 else
                 {
 
-                    ListItems.Add(new ListCarImagesViewModel.Item { Text = unixTimestamp, Image = arquivo.Path});
-                    int current = ListItems.Count - 1;
-                    btTirarFoto.IsEnabled = true;
-                    btAbrirGaleria.IsEnabled = true;
-                    btConcluido.IsEnabled = true;
-                    isUploading.Add(true);
-                    await Task.Run(() => DependencyService.Get<IFtpWebRequest>().upload(server, ListItems[current].Image, user, pass, subDir));
-                    isUploading[current] = false;
-                }
+                    ListItems.Add(new ListCarImagesViewModel.Item { Text = unixTimestamp, Image = arquivo.Path, Uploading = true });;
+                    await Task.Run(() =>
+                    {
+                        int current = ListItems.Count - 1;
 
-                loading.IsRunning = false;
-                loading.IsVisible = false;
-                btTirarFoto.IsEnabled = true;
-                btAbrirGaleria.IsEnabled = true;
-                btConcluido.IsEnabled = true;
+                        bool resp = DependencyService.Get<IFtpWebRequest>().uploadAsync(server, ListItems[current].Image, user, pass, subDir).Result;
+
+                        Task.Delay(2000);
+
+                        Device.BeginInvokeOnMainThread(() => 
+                        {
+                            ListItems.ElementAt(current).Uploading = false;
+                            loading.IsRunning = false;
+                            loading.IsVisible = false;
+                        });
+
+                        if (!resp)
+                        {
+                            erros = true;
+                            qtdErro++;
+                        }
+                        uploading.Add(resp);
+                        return;
+                    });
+
+                }
             }
             catch (Exception err)
             {
@@ -190,24 +249,38 @@ namespace Contato_Vistoria
                 var ListItems = ((ListCarImagesViewModel)BindingContext).Items;
                 if (ListItems.Count > 0)
                 {
-                    loading.IsRunning = true;
-                    loading.IsVisible = true;
-                    btTirarFoto.IsEnabled = false;
-                    btAbrirGaleria.IsEnabled = false;
-                    btConcluido.IsEnabled = false;
-                    await Task.Delay(1000);
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        loading.IsRunning = true;
+                        loading.IsVisible = true;
+                        btTirarFoto.IsEnabled = false;
+                        btAbrirGaleria.IsEnabled = false;
+                        btConcluido.IsEnabled = false;
+                    });
 
-                    while (!isUploading.All(x => x == false))
+
+                    while(!ListItems.All(x => x.Uploading == false))
                         await Task.Delay(1000);
 
-                    await DisplayAlert("Upload", "Upload de fotos realizado com sucesso! :) (Por Segurança, Favor Checar se já está no servidor)", "Ok");
-                    loading.IsRunning = false;
-                    loading.IsVisible = false;
-                    btTirarFoto.IsEnabled = true;
-                    btAbrirGaleria.IsEnabled = true;
-                    btConcluido.IsEnabled = true;
+
+                    if(uploading.All(x => x == true))
+                        await DisplayAlert("Upload", "Upload de fotos realizado com sucesso! :) (Por Segurança, Favor Checar se já está no servidor)", "Ok");
+
+                    if (erros)
+                        await DisplayAlert("Erro no Upload", "Houve erro ao fazer o upload de " + qtdErro + " fotos. Favor checar no servidor.", "Ok");
+
+
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        loading.IsRunning = false;
+                        loading.IsVisible = false;
+                        btTirarFoto.IsEnabled = true;
+                        btAbrirGaleria.IsEnabled = true;
+                        btConcluido.IsEnabled = true;
+                    });
 
                 }
+                uploading.Clear();
                 await Navigation.PopAsync();
             }
             catch (Exception err)
@@ -218,25 +291,56 @@ namespace Contato_Vistoria
     }
 
 
-
     class ListCarImagesViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<Item> Items { get; }
-        public ListCarImagesViewModel()
-        {
-            Items = new ObservableCollection<Item>();
-        }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        void OnPropertyChanged([CallerMemberName]string propertyName = "") =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        void OnPropertyChanged([CallerMemberName]string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-        public class Item
+        private ObservableCollection<Item> _Items;
+        public ObservableCollection<Item> Items
         {
+            get
+            {
+                return _Items;
+            }
+            set
+            {
+                _Items = value;
+                OnPropertyChanged("Items");
+            }
+        }
+
+        public ListCarImagesViewModel()
+        {
+            _Items = new ObservableCollection<Item>();
+        }
+
+        public class Item : INotifyPropertyChanged
+        {
+
+            public event PropertyChangedEventHandler PropertyChanged;
+            void OnPropertyChanged([CallerMemberName]string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
             public string Image { get; set; }
             public string Text { get; set; }
+            private bool _Uploading;
+            public bool Uploading
+            {
+                get
+                {
+                    return _Uploading;
+                }
+                set
+                {
+                    _Uploading = value;
+                    OnPropertyChanged("Uploading");
+                }
+            }
 
             public override string ToString() => Image;
+
+
         }
     }
 }

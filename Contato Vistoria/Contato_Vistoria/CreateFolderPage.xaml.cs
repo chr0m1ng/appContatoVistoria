@@ -57,7 +57,7 @@ namespace Contato_Vistoria
                         ListPage = new ListCarImages(entryLetras.Text + "-" + entryNumeros.Text + " - MEGALAUDO", "ftp://" + myIp, Settings.user, Settings.pass);
                     }
                     else
-                        ListPage = new ListCarImages(entryLetras.Text + "-" + entryNumeros.Text, Settings.server, Settings.user, Settings.pass);
+                        ListPage = new ListCarImages(entryLetras.Text + "-" + entryNumeros.Text, "ftp://" + Settings.server, Settings.user, Settings.pass);
                     entryLetras.Text = "";
                     entryNumeros.Text = "";
                     switchMegaLaudo.IsToggled = false;

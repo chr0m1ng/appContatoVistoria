@@ -22,10 +22,25 @@ namespace Contato_Vistoria.Droid
             LoadApplication(new App());
         }
 
+        protected override void OnUserLeaveHint()
+        {
+            if (Directory.Exists("/storage/emulated/0/Android/data/Contato_Vistoria.Contato_Vistoria/files/Pictures"))
+                Directory.Delete("/storage/emulated/0/Android/data/Contato_Vistoria.Contato_Vistoria/files/Pictures", true);
+            base.OnUserLeaveHint();
+        }
+
+        protected override void JavaFinalize()
+        {
+            if (Directory.Exists("/storage/emulated/0/Android/data/Contato_Vistoria.Contato_Vistoria/files/Pictures"))
+                Directory.Delete("/storage/emulated/0/Android/data/Contato_Vistoria.Contato_Vistoria/files/Pictures", true);
+            base.JavaFinalize();
+        }
+
         protected override void OnDestroy()
         {
+            if(Directory.Exists("/storage/emulated/0/Android/data/Contato_Vistoria.Contato_Vistoria/files/Pictures"))
+                Directory.Delete("/storage/emulated/0/Android/data/Contato_Vistoria.Contato_Vistoria/files/Pictures", true);
             base.OnDestroy();
-            Directory.Delete("/storage/emulated/0/Android/data/Contato_Vistoria.Android/files/Pictures", true);
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)

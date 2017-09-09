@@ -15,7 +15,7 @@
                 <ContentView HeightRequest="{Binding Source={x:Reference lbServer}, Path=Height}"/>
             </StackLayout>
 
-            <Entry Placeholder="ftp://192.168.1.19" FontSize="20" WidthRequest="300" Text="ftp://192.168.1.19" x:Name="entryServer"
+            <Entry Placeholder="ftp://192.168.1.19" FontSize="20" WidthRequest="300" Text="192.168.1.19" x:Name="entryServer"
                    RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=ServerFinalPos, Property=Height, Factor=1}"
                    RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"/>
 

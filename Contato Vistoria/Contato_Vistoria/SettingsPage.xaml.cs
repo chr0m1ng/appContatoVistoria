@@ -26,8 +26,8 @@ namespace Contato_Vistoria
 
         protected async void btSalvarClicked(object sender, EventArgs e)
         {
-            server = entryServer.Text;
-            user = entryUser.Text;
+            server = entryServer.Text.Trim();
+            user = entryUser.Text.Trim();
             pass = entryPass.Text;
 
             await DisplayAlert("Opções", "Salvo com Sucesso!", "Ok");

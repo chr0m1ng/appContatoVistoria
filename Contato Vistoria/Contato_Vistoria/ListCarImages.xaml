@@ -9,7 +9,7 @@
                 ItemTapped="Handle_ItemTapped"
                 ItemSelected="Handle_ItemSelected"
                 HasUnevenRows="true"
-                
+                x:Name="mylistview"
                 IsGroupingEnabled="False"
                 CachingStrategy="RecycleElement">
 
@@ -19,6 +19,7 @@
                     <StackLayout Orientation="Vertical">
                         <StackLayout Orientation="Horizontal" Spacing="5">
                             <Label  Text="{Binding Text}" FontSize="30" HorizontalOptions="Start"/>
+                            <ActivityIndicator IsRunning="True" IsVisible="{Binding Path=Uploading, Mode=TwoWay}" IsEnabled="True" HorizontalOptions="End"/>
                         </StackLayout>
                     </StackLayout>
                 </ViewCell>
@@ -27,8 +28,14 @@
 
         <ListView.Footer>
             <RelativeLayout>
-                
+                <Label Text="{Binding StringFormat='Quantidade de fotos = {0}', Path=Items.Count, Mode=OneWay}" FontSize="16" x:Name="contador"
+                       RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"/>
+                <StackLayout Orientation="Horizontal" x:Name="contadorFinalY">
+                    <ContentView WidthRequest="{Binding Source=contador, Path=Y}"/>
+                    <ContentView WidthRequest="{Binding Source=contador, Path=Height}"/>
+                </StackLayout>
                 <ActivityIndicator Color="Gray" IsRunning="False" IsVisible="False" x:Name="loading"
+                                   RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=contadorFinalY, Property=Width, Factor=1, Constant=5}"
                                    RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"/>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10"
                              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=loading, Property=Height, Factor=1, Constant=10}"
