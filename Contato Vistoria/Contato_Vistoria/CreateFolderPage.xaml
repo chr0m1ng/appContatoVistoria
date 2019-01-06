@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Contato_Vistoria.CreateFolderPage"
@@ -32,7 +32,7 @@
                         </Entry.Behaviors>
                     </Entry>
                     <Label Text="-" FontSize="40"/>
-                    <Entry Placeholder="0000" FontSize="40" Keyboard="Numeric" Text="{Binding EntryText}" x:Name="entryNumeros">
+                    <Entry Placeholder="0A00" FontSize="40" Text="{Binding EntryText}" x:Name="entryNumeros">
                         <Entry.Behaviors>
                             <behaviors:EntryLengthValidatorBehavior MaxLength="4"/>
                         </Entry.Behaviors>
